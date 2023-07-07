@@ -1,0 +1,18 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "../../../../specs-development/specs-development/wsdl/ver10/device/wsdl/devicemgmt.wsdl"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "internalTypeAccess": true,
+    "namespaceMappings": [
+      "*, DeviceClient"
+    ],
+    "sync": true,
+    "targetFramework": "net7.0",
+    "typeReuseMode": "All"
+  }
+}
