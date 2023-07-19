@@ -15,14 +15,31 @@ namespace OnvifTest
         PTZClient? _ptz;
         string? _token;
         VideoCapture? _videoCapture;
+        string ip = "192.168.1.88";
         public Main()
         {
             InitializeComponent();
+            textBox1.Text = ip;
         }
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            var ip = "192.168.1.88";
+            try
+            {
+                await ReConnect();
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private async Task ReConnect()
+        {
+            if (_videoCapture is not null)
+            {
+                _videoCapture.Stop();
+            }
             var port = 8080;
             var user = "admin";
             var pass = "12345678h";
@@ -50,6 +67,7 @@ namespace OnvifTest
             finally
             {
                 frame.Dispose();
+                GC.Collect();
             }
         }
 
@@ -235,6 +253,19 @@ namespace OnvifTest
             });
             await Task.Delay(200);
             await _ptz.StopAsync(_token, true, true);
+        }
+
+        private async void Button5_Click(object sender, EventArgs e)
+        {
+            ip = textBox1.Text;
+            try
+            {
+                await ReConnect();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
